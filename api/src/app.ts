@@ -16,7 +16,7 @@ const SDK_CONFIG = {
 
 export const app = express();
 
-app.use("/app", express.static(WEB_BUILD_PATH));
+app.use("/", express.static(WEB_BUILD_PATH));
 app.use("/docs", swaggerUi.serve, async (_req: any, res: any) => {
   return res.send(
     swaggerUi.generateHTML(await import("../build/swagger.json"))

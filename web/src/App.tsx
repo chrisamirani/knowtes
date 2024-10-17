@@ -21,7 +21,7 @@ function App() {
           position: "right",
           stopOnFocus: true,
           style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            background: "#96c93d",
           },
         }).showToast();
       }
@@ -55,7 +55,7 @@ function App() {
             onChange={(e) => setEmail(e.target.value)}
             required={true}
           />
-          <button type='submit'>Send me progress updates</button>
+          <button type='submit'>Add me to beta release</button>
         </form>
       </header>
     </div>
