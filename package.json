@@ -4,9 +4,9 @@
   "description": "An ultimately simple, searchable and open source knowledge base for all teams.",
   "main": "index.js",
   "scripts": {
-    "install:client": "cd client && pnpm i",
+    "install:client": "cd client && npm i",
     "install:api": "cd api && npm i",
-    "build:client": "cd client && pnpm build",
+    "build:client": "cd client && npm run build",
     "build:api": "cd api && npm run build && npm run generate:client",
     "start:server": "cd api && npm run build && npm run start",
     "install": "npm run install:client && npm run install:api",
