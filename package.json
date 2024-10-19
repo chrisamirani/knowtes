@@ -11,7 +11,7 @@
     "start:server": "cd api && npm run build && npm run start",
     "install": "npm run install:client && npm run install:api",
     "build": "npm run build:api && npm run build:client",
-    "start:client": "npm run build && cd client && npm run start",
+    "start:client": "npm run build && cd client && pnpm start",
     "preinstall": "npm install -g pnpm@9.2.0"
   },
   "keywords": [],

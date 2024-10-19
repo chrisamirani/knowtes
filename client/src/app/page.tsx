@@ -29,6 +29,7 @@ function Home() {
         );
       }
     } catch (e: unknown) {
+      console.log(e);
       toast('Oops, something went wrong.', {
         type: 'error',
         position: 'top-right',
