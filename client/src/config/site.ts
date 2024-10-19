@@ -1,9 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'Next.js',
-  description:
-    'Rich-text editor components built with Radix UI and Tailwind CSS.',
+  name: 'Knowtes',
+  description: 'A Knowledge base that actually keeps the knowledge',
   mainNav: [
     {
       title: 'Home',
@@ -11,8 +10,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: 'https://twitter.com/zbeyens',
-    github: 'https://github.com/udecode/plate',
-    docs: 'https://platejs.org',
+    github: 'https://github.com/chrisamirani/knowts',
+    docs: 'https://github.com/chrisamirani/knowts',
   },
 };
