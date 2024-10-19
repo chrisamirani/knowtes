@@ -12,13 +12,12 @@
     "install": "npm run install:client && npm run install:api",
     "build": "npm run build:api && npm run build:client",
     "start:client": "npm run build && cd client && npm run start",
-    "preinstall": "npm install -g pnpm"
+    "preinstall": "npm install -g pnpm@9.2.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "engines": {
-    "pnpm": "9.2.0",
     "node": "20.x"
   }
 }
