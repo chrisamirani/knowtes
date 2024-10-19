@@ -21,8 +21,7 @@ app.use(
   })
 );
 app.use(json());
-
+app.use(cors());
 RegisterRoutes(app);
 app.use(notFoundHandler);
 app.use(errorHandler);
-app.use(cors());
