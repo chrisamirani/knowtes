@@ -11,7 +11,8 @@
     "start:server": "cd api && npm run build && npm run start",
     "install": "npm run install:client && npm run install:api",
     "build": "npm run build:api && npm run build:client",
-    "start:client": "npm run build && cd client && npm run start"
+    "start:client": "npm run build && cd client && npm run start",
+    "preinstall": "curl -fsSL https://get.pnpm.io/install.sh | sh -"
   },
   "keywords": [],
   "author": "",
