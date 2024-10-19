@@ -118,8 +118,5 @@
         "scheduler"
       ]
     }
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
