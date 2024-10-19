@@ -4,14 +4,14 @@
   "description": "An ultimately simple, searchable and open source knowledge base for all teams.",
   "main": "index.js",
   "scripts": {
-    "install:web": "cd web && npm i",
+    "install:client": "cd client && pnpm i",
     "install:api": "cd api && npm i",
-    "build:web": "cd web && npm run build",
-    "build:api": "cd api && npm run build",
-    "start:server": "cd api && npm run start",
-    "install": "npm run install:web && npm run install:api",
-    "build": "npm run build:api && npm run build:web",
-    "start": "npm run build && npm run start:server"
+    "build:client": "cd client && pnpm build",
+    "build:api": "cd api && npm run build && npm run generate:client",
+    "start:server": "cd api && npm run build && npm run start",
+    "install": "npm run install:client && npm run install:api",
+    "build": "npm run build:api && npm run build:client",
+    "start:client": "npm run build && cd client && npm run start"
   },
   "keywords": [],
   "author": "",
