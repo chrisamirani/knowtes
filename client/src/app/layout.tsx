@@ -11,6 +11,8 @@ import '@/styles/globals.css';
 
 import { Metadata, Viewport } from 'next';
 
+import { ToastProvider } from '@/lib/ToastProvider';
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -55,7 +57,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             >
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
-                <div className="flex-1">{children}</div>
+                <ToastProvider>
+                  <div className="flex-1">{children}</div>
+                </ToastProvider>
               </div>
               <TailwindIndicator />
             </TooltipProvider>

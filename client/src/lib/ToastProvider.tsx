@@ -1,15 +1,26 @@
 'use client';
 
 import 'react-toastify/dist/ReactToastify.css';
-import '../styles/globals.css';
 
-import { ToastContainer } from 'react-toastify';
+import {
+  toast as defaultToast,
+  ToastContainer,
+  ToastOptions,
+} from 'react-toastify';
 
 interface ToastProviderProps {
   children: React.ReactNode;
 }
 
-export default function ToastProvider({ children }: ToastProviderProps) {
+export function toast(msg: string, options: ToastOptions) {
+  defaultToast(msg, {
+    position: 'top-right',
+    autoClose: 3000,
+    ...options,
+  });
+}
+
+export function ToastProvider({ children }: ToastProviderProps) {
   return (
     <>
       {children}

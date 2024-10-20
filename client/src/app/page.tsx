@@ -4,9 +4,10 @@ import '../styles/Landing.css';
 
 import { useState } from 'react';
 import API from '@/api';
-import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+
+import { toast } from '@/lib/ToastProvider';
 
 function Home() {
   const [email, setEmail] = useState('');
@@ -18,38 +19,24 @@ function Home() {
 
       const success = res.valueOf();
 
+      console.log({ success });
       if (success) {
         return toast(
           "Thanks for subscribing. You'll receive update emails soon!",
           {
             type: 'success',
-            position: 'top-right',
-            autoClose: 3000,
           }
         );
       }
     } catch (e: unknown) {
       console.log(e);
-      toast('Oops, something went wrong.', {
-        type: 'error',
-        position: 'top-right',
-        autoClose: 3000,
-      });
     }
+    toast('Oops, something went wrong.', {
+      type: 'error',
+    });
   };
   return (
     <div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-      />
-
       <div className="App">
         <header className="App-header">
           <img src={'logo192.png'} className="App-logo" alt="logo" />
