@@ -22,4 +22,4 @@ If you hate being a corporate hot potato 🥔 this is the project to work on. In
 
 [FigJam](https://www.figma.com/board/DYh6L2j4L4sxMEtsFFEoPV/Knowtes-Jam?node-id=0-1&t=7eDlMXPOqeJs8fb7-1): For planning and brain dumps
 
-[Figma Designs](https://www.figma.com/design/Kgya0sq9gSX1KhCjI5bfDN/Knowtes?node-id=0-1&t=coL2liG0OnisBEhe-1)
+[Figma Designs](https://www.figma.com/design/Kgya0sq9gSX1KhCjI5bfDN/Knowtes?node-id=0-1&t=coL2liG0OnisBEhe-1): For design language and files
