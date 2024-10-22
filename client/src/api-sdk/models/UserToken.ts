@@ -2,8 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EmailField } from './EmailField';
-export type Subscription = {
-    email: EmailField;
-};
-
+/**
+ * A JWT string for authentication
+ */
+export type UserToken = string;

@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 /**
  * @pattern ^[^@]+@[^@]+\.[^@]+$
  */
@@ -12,7 +14,7 @@ export interface Subscription {
   email: EmailField;
 }
 
-export interface SignupUser {
+export interface IUser {
   /**
    * The name of the user
    *
@@ -39,4 +41,14 @@ export interface SignupUser {
    */
   teamId: string | undefined;
   email: EmailField;
+}
+
+export type LoginUser = Pick<IUser, "email" | "password">;
+
+/**
+ * User data to be safely used on the client
+ */
+export type IClientUser = Omit<IUser, "password">;
+export interface IAuthenticatedRequest extends Request {
+  email: string;
 }

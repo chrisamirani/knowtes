@@ -3,9 +3,6 @@ import swaggerUi from "swagger-ui-express";
 import { RegisterRoutes } from "../build/routes";
 import { errorHandler, notFoundHandler } from "./errors";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config({ path: "../.env" });
 
 export const app = express();
 

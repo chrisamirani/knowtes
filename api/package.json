@@ -7,7 +7,7 @@
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "start": "node build/src/server.js",
     "build": "tsoa spec-and-routes && tsc",
-    "generate:client": "npm run build && ts-node ./generate-client.ts"
+    "generate:client": "ts-node ./generate-client.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.2",
     "openapi-typescript-codegen": "^0.29.0",
+    "resend": "^4.0.0",
     "swagger-ui-express": "^5.0.1",
     "tsoa": "^6.5.1"
   },
@@ -31,6 +32,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
     "@types/swagger-ui-express": "^4.1.6",
     "concurrently": "^9.0.1",
     "nodemon": "^3.1.7",
