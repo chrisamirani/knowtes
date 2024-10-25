@@ -6,7 +6,6 @@ import { INote } from '@/api-sdk';
 
 import { toast } from '@/lib/ToastProvider';
 
-import { Icons } from './icons';
 import { buttonVariants } from './plate-ui/button';
 
 export default function RecentNotes() {
@@ -18,6 +17,7 @@ export default function RecentNotes() {
 
         setNotes(res);
       } catch (e: unknown) {
+        console.log(e);
         toast('Could not get recent notes', { type: 'warning' });
       }
     };
@@ -28,7 +28,7 @@ export default function RecentNotes() {
   const NotesList = () => {
     if (notes.length === 0) {
       return (
-        <div className="bg-secondary rounded-md h-10 flex justify-center items-center">
+        <div className="flex h-10 items-center justify-center rounded-md bg-secondary">
           <p>No recent notes</p>
         </div>
       );

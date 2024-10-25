@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { cn } from '@udecode/cn';
 
 import { NavItem } from '@/types/nav';
-import { siteConfig } from '@/config/site';
 
 interface MainNavProps {
   items?: NavItem[];

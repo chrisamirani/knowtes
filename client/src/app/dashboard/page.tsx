@@ -20,6 +20,7 @@ export default function Dashboard() {
       setNoteId(newNoteId);
       return newNoteId;
     } catch (e: unknown) {
+      console.log(e);
       toast('Could not initialize a note', { type: 'error' });
     }
   };
@@ -41,6 +42,7 @@ export default function Dashboard() {
       console.log('Saved note');
       setSaving(false);
     } catch (e: unknown) {
+      console.log(e);
       toast('Could not save the note. Please check your connection.', {
         type: 'error',
       });
@@ -56,7 +58,7 @@ export default function Dashboard() {
 
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <p className="text-slate-400 text-sm">{saving ? 'Saving...' : 'Saved'}</p>
+      <p className="text-sm text-slate-400">{saving ? 'Saving...' : 'Saved'}</p>
       <div className="max-w-[1336px] rounded-lg border bg-background shadow">
         <PlateEditor onChange={setContent} />
       </div>

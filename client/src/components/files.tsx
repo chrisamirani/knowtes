@@ -35,7 +35,7 @@ export default function CommandCenter() {
           })}
         >
           New note
-          <Icons.add className="size-5 ml-2" />
+          <Icons.add className="ml-2 size-5" />
         </div>
       </DialogContent>
     </Dialog>
