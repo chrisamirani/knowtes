@@ -5,12 +5,11 @@
 import type { IClientUser } from '../models/IClientUser';
 import type { IUser } from '../models/IUser';
 import type { Pick_IUser_email_or_password_ } from '../models/Pick_IUser_email_or_password_';
-import type { Subscription } from '../models/Subscription';
 import type { UserToken } from '../models/UserToken';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-export class DefaultService {
+export class UsersService {
     /**
      * Create a new user without an assigned team. This user can later create a team and invite others.
      * @param requestBody
@@ -52,22 +51,6 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/me',
-        });
-    }
-    /**
-     * This service subscribes an email to receive development updates on Knowtes.
-     * @param requestBody
-     * @returns boolean Ok
-     * @throws ApiError
-     */
-    public static subscribeToProgress(
-        requestBody: Subscription,
-    ): CancelablePromise<boolean> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/contact/subscribe',
-            body: requestBody,
-            mediaType: 'application/json',
         });
     }
 }

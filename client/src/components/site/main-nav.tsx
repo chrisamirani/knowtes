@@ -21,7 +21,7 @@ export function MainNav({ items }: MainNavProps) {
           src={'logo.svg'}
           alt={'knowtes app'}
         />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
+        {/* <span className="inline-block font-bold">{siteConfig.name}</span> */}
       </Link>
       {items?.length ? (
         <nav className="flex gap-6">

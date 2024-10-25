@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Request, Route, Security } from "tsoa";
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  Route,
+  Security,
+  Tags,
+} from "tsoa";
 import {
   IAuthenticatedRequest,
   IClientUser,
@@ -13,6 +22,7 @@ import {
 } from "../services/users";
 
 @Route("users")
+@Tags("Users")
 export class UsersController extends Controller {
   /**
    * Create a new user without an assigned team. This user can later create a team and invite others.

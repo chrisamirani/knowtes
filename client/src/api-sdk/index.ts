@@ -9,12 +9,24 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { EmailField } from './models/EmailField';
 export type { IClientUser } from './models/IClientUser';
+export type { INote } from './models/INote';
 export type { IUser } from './models/IUser';
 export type { LoginUser } from './models/LoginUser';
+export type { Omit_INote_body_ } from './models/Omit_INote_body_';
 export type { Omit_IUser_password_ } from './models/Omit_IUser_password_';
+export type { Pick_INote_Exclude_keyofINote_body__ } from './models/Pick_INote_Exclude_keyofINote_body__';
 export type { Pick_IUser_email_or_password_ } from './models/Pick_IUser_email_or_password_';
 export type { Pick_IUser_Exclude_keyofIUser_password__ } from './models/Pick_IUser_Exclude_keyofIUser_password__';
+export type { Record_string_unknown_ } from './models/Record_string_unknown_';
 export type { Subscription } from './models/Subscription';
+export type { TDescendant } from './models/TDescendant';
+export type { TDocumentId } from './models/TDocumentId';
+export type { TElement } from './models/TElement';
+export type { TNoteBody } from './models/TNoteBody';
+export type { TText } from './models/TText';
+export type { UnknownObject } from './models/UnknownObject';
 export type { UserToken } from './models/UserToken';
 
-export { DefaultService } from './services/DefaultService';
+export { ContactService } from './services/ContactService';
+export { NotesService } from './services/NotesService';
+export { UsersService } from './services/UsersService';

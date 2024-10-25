@@ -5,12 +5,11 @@
 /**
  * From T, pick a set of properties whose keys are in the union K
  */
-export type Pick_IUser_Exclude_keyofIUser_password__ = {
-    email: string;
+export type Pick_INote_Exclude_keyofINote_body__ = {
+    id: string;
     /**
-     * The name of the user
+     * The title of the note.
      */
-    name: string;
-    teamId: string;
+    title: string;
 };
 

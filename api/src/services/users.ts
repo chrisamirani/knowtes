@@ -3,6 +3,7 @@ import { IClientUser, IUser, LoginUser } from "../types";
 import bcrypt from "bcryptjs";
 import { sendEmailConfirmationEmail } from "./email";
 import { generateToken } from "./auth";
+import { TeamDB } from "../db/team";
 
 export const signUpNewUser = async (user: IUser) => {
   const { email, password } = user;
@@ -15,7 +16,12 @@ export const signUpNewUser = async (user: IUser) => {
   const hashedPassword = await bcrypt.hash(password, bcrypt.genSaltSync(10));
   const newUser = new UsersDB({ ...user, password: hashedPassword });
 
+  const newTeam = new TeamDB({ owner: newUser.id });
+
+  newUser.team = newTeam.id;
+
   await newUser.save();
+  await newTeam.save();
 
   const token = generateToken(email);
 

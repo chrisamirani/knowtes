@@ -15,7 +15,7 @@ function Home() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await API.DefaultService.subscribeToProgress({ email });
+      const res = await API.ContactService.subscribeToProgress({ email });
 
       const success = res.valueOf();
 

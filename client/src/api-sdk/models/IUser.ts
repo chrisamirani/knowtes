@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { EmailField } from './EmailField';
+import type { TDocumentId } from './TDocumentId';
 export type IUser = {
     /**
      * The name of the user
@@ -17,10 +18,7 @@ export type IUser = {
      * - At least one special character (e.g.,
      */
     password: string;
-    /**
-     * The ID of the associated team
-     */
-    teamId?: string;
+    teamId?: TDocumentId;
     email: EmailField;
 };
 

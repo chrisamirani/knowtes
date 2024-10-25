@@ -1,8 +1,9 @@
-import { Body, Controller, Post, Route } from "tsoa";
+import { Body, Controller, Post, Route, Tags } from "tsoa";
 import { Subscription } from "../types";
 import { createSubscription } from "../services/contact";
 
 @Route("contact")
+@Tags("Contact")
 export class ContactsController extends Controller {
   /**
    * This service subscribes an email to receive development updates on Knowtes.
