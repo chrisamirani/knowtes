@@ -4,13 +4,19 @@ import {
   Get,
   Post,
   Put,
+  Query,
   Request,
   Route,
   Security,
   Tags,
 } from "tsoa";
 import { IAuthenticatedRequest, INote, TDocumentId } from "../types";
-import { getRecentNotes, initNewNote, updateNote } from "../services/note";
+import {
+  getNoteById,
+  getRecentNotes,
+  initNewNote,
+  updateNote,
+} from "../services/note";
 
 @Route("notes")
 @Tags("Notes")
@@ -51,5 +57,17 @@ export class NotesController extends Controller {
     @Request() req: IAuthenticatedRequest
   ): Promise<Omit<INote, "body">[]> {
     return await getRecentNotes(req.email);
+  }
+
+  /**
+   * Get full note content by id
+   */
+
+  @Get("by-id")
+  public async byId(
+    @Request() req: IAuthenticatedRequest,
+    @Query() id: TDocumentId
+  ): Promise<INote | undefined> {
+    return await getNoteById(req.email, id);
   }
 }

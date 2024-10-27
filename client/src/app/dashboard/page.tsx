@@ -1,17 +1,29 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import API from '@/api';
 import { Value } from '@udecode/plate-common';
 
 import { toast } from '@/lib/ToastProvider';
 import { useDebounce } from '@/hooks/use-debounce';
+import FullPageLoader from '@/components/full-page-loader';
 import PlateEditor from '@/components/plate-editor';
 
+const initialTitle = 'Start with a title';
+
+const emptyContent = [
+  {
+    type: 'h1',
+    children: [{ text: initialTitle }],
+  },
+];
 export default function Dashboard() {
-  const [content, setContent] = useState([]);
+  const [content, setContent] = useState<Value | never[] | undefined>();
+  const [loading, setLoading] = useState(true);
   const [noteId, setNoteId] = useState('');
   const [saving, setSaving] = useState(false);
+  const params = useSearchParams();
 
   const debouncedContent = useDebounce(content, 5000);
   const initNote = async () => {
@@ -24,22 +36,26 @@ export default function Dashboard() {
       toast('Could not initialize a note', { type: 'error' });
     }
   };
-  const handleSave = async (note: Value) => {
-    if (note.length === 0) {
+  const handleSave = async (body: Value) => {
+    if (body.length === 0) {
       return;
     }
 
+    const title = body[0].children[0].text as string;
+
+    if (title === initialTitle) {
+      return;
+    }
     setSaving(true);
     const id = noteId.length > 0 ? noteId : await initNote();
     const payload = {
-      title: note[0].children[0].text as string,
-      body: note.slice(1),
+      title,
+      body,
       id,
     };
 
     try {
       await API.NotesService.update(payload);
-      console.log('Saved note');
       setSaving(false);
     } catch (e: unknown) {
       console.log(e);
@@ -49,6 +65,15 @@ export default function Dashboard() {
     }
   };
 
+  // show the full page loader when content is empty
+  useEffect(() => {
+    if (!content) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [content]);
+
   // Save 5 seconds after user pause
   useEffect(() => {
     if (debouncedContent) {
@@ -56,11 +81,47 @@ export default function Dashboard() {
     }
   }, [debouncedContent]);
 
+  useEffect(() => {
+    const init = async () => {
+      const id = params.get('id');
+      if (!id) {
+        setContent(undefined);
+        // intentionally pause to trigger a render
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setContent(emptyContent);
+        return;
+      }
+      try {
+        setNoteId(id);
+        setContent(undefined);
+        const note = await API.NotesService.byId(id);
+        if (!note) {
+          return toast('Could not find your note. Please try again later', {
+            type: 'warning',
+          });
+        }
+
+        setContent(note.body);
+      } catch (e: unknown) {
+        console.log(e);
+        toast('could not find your note. Please try again later', {
+          type: 'warning',
+        });
+      }
+    };
+
+    init();
+  }, [params]);
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <p className="text-sm text-slate-400">{saving ? 'Saving...' : 'Saved'}</p>
-      <div className="max-w-[1336px] rounded-lg border bg-background shadow">
-        <PlateEditor onChange={setContent} />
+      <div className="max-w-[1336px]">
+        {loading ? (
+          <FullPageLoader />
+        ) : (
+          <PlateEditor content={content} onChange={setContent} />
+        )}
       </div>
     </section>
   );

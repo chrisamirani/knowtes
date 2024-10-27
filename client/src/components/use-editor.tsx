@@ -28,6 +28,7 @@ import {
   isBlockAboveEmpty,
   isSelectionAtBlockStart,
   someNode,
+  Value,
 } from '@udecode/plate-common';
 import {
   ParagraphPlugin,
@@ -99,7 +100,7 @@ import { TableElement } from '@/components/plate-ui/table-element';
 import { TableRowElement } from '@/components/plate-ui/table-row-element';
 import { TodoListElement } from '@/components/plate-ui/todo-list-element';
 
-export const useMyEditor = () => {
+export const useMyEditor = (initialContent: Value | never[] | undefined) => {
   const editor = usePlateEditor({
     plugins: [
       // Nodes
@@ -347,12 +348,7 @@ export const useMyEditor = () => {
         [UnderlinePlugin.key]: withProps(PlateLeaf, { as: 'u' }),
       }),
     },
-    value: [
-      {
-        type: 'h1',
-        children: [{ text: 'Start with a title' }],
-      },
-    ],
+    value: initialContent,
   });
 
   return editor;

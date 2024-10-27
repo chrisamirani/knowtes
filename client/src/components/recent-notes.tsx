@@ -1,15 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import API from '@/api';
 import { INote } from '@/api-sdk';
+import { Loader2 } from 'lucide-react';
 
 import { toast } from '@/lib/ToastProvider';
 
 import { buttonVariants } from './plate-ui/button';
+import { DialogClose } from './plate-ui/dialog';
 
 export default function RecentNotes() {
   const [notes, setNotes] = useState<Omit<INote, 'body'>[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchRecentNotes = async () => {
       try {
@@ -20,6 +24,7 @@ export default function RecentNotes() {
         console.log(e);
         toast('Could not get recent notes', { type: 'warning' });
       }
+      setLoading(false);
     };
 
     fetchRecentNotes();
@@ -27,22 +32,28 @@ export default function RecentNotes() {
 
   const NotesList = () => {
     if (notes.length === 0) {
-      return (
-        <div className="flex h-10 items-center justify-center rounded-md bg-secondary">
-          <p>No recent notes</p>
-        </div>
-      );
+      if (loading) {
+        return <Loader2 className="size-6 animate-spin" />;
+      }
+      return <p>No recent notes</p>;
     }
-    return notes.map((note) => (
-      <p className={buttonVariants({ size: 'default', variant: 'ghost' })}>
-        {note.title}
-      </p>
+    return notes.map((note, index) => (
+      <DialogClose key={index} asChild>
+        <Link
+          className={`${buttonVariants({ size: 'default', variant: 'outline' })} !block w-full text-left`}
+          href={`/dashboard?id=${note.id}`}
+        >
+          {note.title}
+        </Link>
+      </DialogClose>
     ));
   };
   return (
     <div>
       <h4>Recent notes:</h4>
-      <NotesList />
+      <div className="flex max-h-56 scroll-m-0 flex-col items-center justify-center gap-2 overflow-y-scroll rounded-md bg-secondary p-5">
+        <NotesList />
+      </div>
     </div>
   );
 }

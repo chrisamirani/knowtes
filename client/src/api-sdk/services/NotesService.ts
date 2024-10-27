@@ -47,4 +47,21 @@ export class NotesService {
             url: '/notes/recent',
         });
     }
+    /**
+     * Get full note content by id
+     * @param id
+     * @returns INote Ok
+     * @throws ApiError
+     */
+    public static byId(
+        id: TDocumentId,
+    ): CancelablePromise<INote> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/notes/by-id',
+            query: {
+                'id': id,
+            },
+        });
+    }
 }

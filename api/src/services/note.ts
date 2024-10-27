@@ -58,3 +58,26 @@ export const getRecentNotes = async (email: string) => {
     throw new Error("Could not get recent notes");
   }
 };
+
+export const getNoteById = async (email: string, _id: string) => {
+  try {
+    const user = await UsersDB.findOne({ email });
+    if (!user) {
+      throw new Error("User does not exist");
+    }
+    const note = await NoteDB.findOne({ _id, team: user.team });
+
+    if (!note) {
+      throw new Error("Could not find note");
+    }
+
+    return {
+      id: note.id,
+      title: note.title,
+      body: note.body,
+    };
+  } catch (e: unknown) {
+    console.log(e);
+    throw new Error("Could not get recent notes");
+  }
+};

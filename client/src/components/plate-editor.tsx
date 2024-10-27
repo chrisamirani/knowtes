@@ -14,12 +14,13 @@ import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-b
 import { useMyEditor } from './use-editor';
 
 interface IProps {
-  onChange: (body: Value & never[]) => void;
+  onChange: (body: Value | never[]) => void;
+  content: Value | never[] | undefined;
 }
 export default function PlateEditor(props: IProps) {
   const containerRef = useRef(null);
 
-  const editor = useMyEditor();
+  const editor = useMyEditor(props.content);
 
   return (
     <Plate

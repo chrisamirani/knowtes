@@ -7,7 +7,10 @@ import API from '@/api';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import Image from 'next/image';
+
 import { toast } from '@/lib/ToastProvider';
+import { buttonVariants } from '@/components/plate-ui/button';
 
 function Home() {
   const [email, setEmail] = useState('');
@@ -39,7 +42,7 @@ function Home() {
     <div>
       <div className="App">
         <header className="App-header">
-          <img src={'logo192.png'} className="App-logo" alt="logo" />
+          <Image width={150} height={150} src={'/logo192.png'} alt="logo" />
           <p>
             An ultimately simple, searchable and open source knowledge base for
             all teams.
@@ -53,7 +56,10 @@ function Home() {
               onChange={(e) => setEmail(e.target.value)}
               required={true}
             />
-            <button className="landingBtn" type="submit">
+            <button
+              className={buttonVariants({ variant: 'default', size: 'lg' })}
+              type="submit"
+            >
               Add me to beta release
             </button>
           </form>

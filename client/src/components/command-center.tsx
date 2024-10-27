@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
@@ -13,6 +16,11 @@ import { Input } from './plate-ui/input';
 import RecentNotes from './recent-notes';
 
 export default function CommandCenter() {
+  const params = useSearchParams();
+  const [newId, setNewId] = useState('');
+  useEffect(() => {
+    setNewId(String(Math.random()).slice(2));
+  }, [params]);
   return (
     <Dialog>
       <DialogTrigger
@@ -27,16 +35,19 @@ export default function CommandCenter() {
         <DialogTitle>Command center</DialogTitle>
         <Input type="search" placeholder="What are you looking for?" />
         <RecentNotes />
-        <div
-          className={buttonVariants({
-            size: 'default',
-            variant: 'default',
-            isMenu: true,
-          })}
-        >
-          New note
-          <Icons.add className="ml-2 size-5" />
-        </div>
+        <DialogClose asChild>
+          <Link
+            className={buttonVariants({
+              size: 'default',
+              variant: 'default',
+              isMenu: true,
+            })}
+            href={`/dashboard?note=${newId}`}
+          >
+            New note
+            <Icons.add className="ml-2 size-5" />
+          </Link>
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );

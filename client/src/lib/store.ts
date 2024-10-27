@@ -4,14 +4,14 @@ import API from '@/api';
 import { IClientUser } from '@/api-sdk';
 import { create, StoreApi, UseBoundStore } from 'zustand';
 
-interface IUserStore {
-  user: IClientUser | Record<string, never>;
+interface IKnowtesStore {
+  user: IClientUser | undefined;
   fetchUser: () => Promise<void>;
 }
 
-export const useUserStore: UseBoundStore<StoreApi<IUserStore>> = create(
+export const useKnowtesStore: UseBoundStore<StoreApi<IKnowtesStore>> = create(
   (set) => ({
-    user: {},
+    user: undefined,
     fetchUser: async () => {
       try {
         const user = await API.UsersService.me();

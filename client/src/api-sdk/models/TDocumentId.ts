@@ -3,6 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * The ID of the associated team
+ * The ID of the requested resource
  */
 export type TDocumentId = string;

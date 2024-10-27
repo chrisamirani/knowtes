@@ -7,7 +7,7 @@ import { Request } from "express";
 export type EmailField = string;
 
 /**
- * The ID of the associated team
+ * The ID of the requested resource
  *
  * @pattern ^[a-f\d]{24}$
  * @example 671ba7b1f9ed4ba58f0752ca
