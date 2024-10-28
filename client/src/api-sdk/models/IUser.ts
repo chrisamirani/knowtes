@@ -18,7 +18,7 @@ export type IUser = {
      * - At least one special character (e.g.,
      */
     password: string;
-    teamId?: TDocumentId;
+    team?: TDocumentId;
     email: EmailField;
 };
 

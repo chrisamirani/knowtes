@@ -6,6 +6,11 @@ import { Request } from "express";
  */
 export type EmailField = string;
 
+export interface ITokenPayload {
+  email: string;
+  team: string | undefined;
+}
+
 /**
  * The ID of the requested resource
  *
@@ -44,7 +49,7 @@ export interface IUser {
    */
   password: string;
 
-  teamId: TDocumentId | undefined;
+  team: TDocumentId | undefined;
   email: EmailField;
 }
 
@@ -54,9 +59,7 @@ export type LoginUser = Pick<IUser, "email" | "password">;
  * User data to be safely used on the client
  */
 export type IClientUser = Omit<IUser, "password">;
-export interface IAuthenticatedRequest extends Request {
-  email: string;
-}
+export interface IAuthenticatedRequest extends Request, ITokenPayload {}
 
 type UnknownObject = Record<string, unknown>;
 type TText = {

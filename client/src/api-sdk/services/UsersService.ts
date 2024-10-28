@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { EmailField } from '../models/EmailField';
 import type { IClientUser } from '../models/IClientUser';
 import type { IUser } from '../models/IUser';
 import type { Pick_IUser_email_or_password_ } from '../models/Pick_IUser_email_or_password_';
@@ -51,6 +52,40 @@ export class UsersService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/me',
+        });
+    }
+    /**
+     * Invite a user to join your team
+     * @param requestBody
+     * @returns void
+     * @throws ApiError
+     */
+    public static invite(
+        requestBody: {
+            email: EmailField;
+        },
+    ): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/users/invite',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * Sign up authenticated team member (email invitation flow)
+     * @param requestBody
+     * @returns void
+     * @throws ApiError
+     */
+    public static signUpTeamMember(
+        requestBody: IUser,
+    ): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/users/signup-teammate',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 }

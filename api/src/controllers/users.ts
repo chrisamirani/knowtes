@@ -9,6 +9,7 @@ import {
   Tags,
 } from "tsoa";
 import {
+  EmailField,
   IAuthenticatedRequest,
   IClientUser,
   IUser,
@@ -18,7 +19,9 @@ import {
 import {
   getClientUserByEmail,
   loginUser,
+  inviteNewTeamMember,
   signUpNewUser,
+  signupInvitedUser,
 } from "../services/users";
 
 @Route("users")
@@ -68,6 +71,52 @@ export class UsersController extends Controller {
   ): Promise<IClientUser | undefined> {
     try {
       return await getClientUserByEmail(req.email);
+    } catch (e: unknown) {
+      console.log(e);
+      this.setStatus(400);
+      return;
+    }
+  }
+
+  /**
+   * Invite a user to join your team
+   */
+  @Post("invite")
+  @Security("jwt")
+  public async invite(
+    @Request() req: IAuthenticatedRequest,
+    @Body() body: { email: EmailField }
+  ): Promise<void> {
+    try {
+      return await inviteNewTeamMember(body.email, req.email);
+    } catch (e: unknown) {
+      console.log(e);
+      this.setStatus(400);
+      return;
+    }
+  }
+
+  /**
+   * Sign up authenticated team member (email invitation flow)
+   */
+  @Post("signup-teammate")
+  @Security("jwt")
+  public async signUpTeamMember(
+    @Request() req: IAuthenticatedRequest,
+    @Body() body: IUser
+  ): Promise<void> {
+    const { team, email } = req;
+    console.log({ team, email });
+    if (!req.team) {
+      this.setStatus(400);
+      return;
+    }
+    if (!req.team) {
+      this.setStatus(400);
+      return;
+    }
+    try {
+      return await signupInvitedUser({ ...body, email: req.email }, req.team);
     } catch (e: unknown) {
       console.log(e);
       this.setStatus(400);

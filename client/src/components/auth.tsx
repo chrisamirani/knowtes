@@ -170,7 +170,7 @@ export function Authentication() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button type="submit">Login</Button>
+                  <Button type="submit">Signup</Button>
                 </CardFooter>
               </Card>
             </form>

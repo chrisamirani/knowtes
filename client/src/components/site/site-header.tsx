@@ -8,6 +8,16 @@ import { MainNav } from '@/components/site/main-nav';
 
 import { Authentication } from '../auth';
 import CommandCenter from '../command-center';
+import { Settings } from '../settings';
+
+const UserHeader = () => {
+  return (
+    <div>
+      <CommandCenter />
+      <Settings />
+    </div>
+  );
+};
 
 export function SiteHeader() {
   const { user, fetchUser } = useKnowtesStore();
@@ -20,7 +30,7 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            {user?.name ? <CommandCenter /> : <Authentication />}
+            {user?.name ? <UserHeader /> : <Authentication />}
           </nav>
         </div>
       </div>

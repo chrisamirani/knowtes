@@ -11,6 +11,6 @@ export type Pick_IUser_Exclude_keyofIUser_password__ = {
      * The name of the user
      */
     name: string;
-    teamId: string;
+    team: string;
 };
 

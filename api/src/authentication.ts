@@ -19,6 +19,7 @@ export function expressAuthentication(
     try {
       const tokenPayload = verifyToken(token);
       request.email = tokenPayload?.email ?? "";
+      request.team = tokenPayload?.team ?? "";
       return Promise.resolve(tokenPayload);
     } catch (error) {
       return Promise.reject(new Error("Invalid token"));
