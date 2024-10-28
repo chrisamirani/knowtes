@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EmailField } from '../models/EmailField';
 import type { IClientUser } from '../models/IClientUser';
 import type { IUser } from '../models/IUser';
 import type { Pick_IUser_email_or_password_ } from '../models/Pick_IUser_email_or_password_';
+import type { TEmailField } from '../models/TEmailField';
 import type { UserToken } from '../models/UserToken';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -62,7 +62,7 @@ export class UsersService {
      */
     public static invite(
         requestBody: {
-            email: EmailField;
+            email: TEmailField;
         },
     ): CancelablePromise<void> {
         return __request(OpenAPI, {

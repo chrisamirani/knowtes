@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EmailField } from './EmailField';
+import type { TEmailField } from './TEmailField';
 export type Subscription = {
-    email: EmailField;
+    email: TEmailField;
 };
 

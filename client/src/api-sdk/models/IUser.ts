@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EmailField } from './EmailField';
 import type { TDocumentId } from './TDocumentId';
+import type { TEmailField } from './TEmailField';
 export type IUser = {
     /**
      * The name of the user
@@ -19,6 +19,6 @@ export type IUser = {
      */
     password: string;
     team?: TDocumentId;
-    email: EmailField;
+    email: TEmailField;
 };
 

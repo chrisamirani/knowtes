@@ -4,7 +4,7 @@ import { Request } from "express";
  * @pattern ^[^@]+@[^@]+\.[^@]+$
  * @example johndoe@gmail.com
  */
-export type EmailField = string;
+export type TEmailField = string;
 
 export interface ITokenPayload {
   email: string;
@@ -25,7 +25,7 @@ export type TDocumentId = string;
 export type UserToken = string;
 
 export interface Subscription {
-  email: EmailField;
+  email: TEmailField;
 }
 
 export interface IUser {
@@ -50,7 +50,7 @@ export interface IUser {
   password: string;
 
   team: TDocumentId | undefined;
-  email: EmailField;
+  email: TEmailField;
 }
 
 export type LoginUser = Pick<IUser, "email" | "password">;
@@ -59,6 +59,16 @@ export type LoginUser = Pick<IUser, "email" | "password">;
  * User data to be safely used on the client
  */
 export type IClientUser = Omit<IUser, "password">;
+
+/**
+ * User data to be safely used on the client
+ */
+export interface ITeamMember extends Omit<IUser, "password"> {
+  /**
+   * Indicates whether or not this user is an owner of the team
+   */
+  isOwner: boolean;
+}
 export interface IAuthenticatedRequest extends Request, ITokenPayload {}
 
 type UnknownObject = Record<string, unknown>;

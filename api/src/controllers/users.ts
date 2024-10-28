@@ -9,7 +9,7 @@ import {
   Tags,
 } from "tsoa";
 import {
-  EmailField,
+  TEmailField,
   IAuthenticatedRequest,
   IClientUser,
   IUser,
@@ -85,7 +85,7 @@ export class UsersController extends Controller {
   @Security("jwt")
   public async invite(
     @Request() req: IAuthenticatedRequest,
-    @Body() body: { email: EmailField }
+    @Body() body: { email: TEmailField }
   ): Promise<void> {
     try {
       return await inviteNewTeamMember(body.email, req.email);
