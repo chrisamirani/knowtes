@@ -71,17 +71,17 @@ export interface ITeamMember extends Omit<IUser, "password"> {
 }
 export interface IAuthenticatedRequest extends Request, ITokenPayload {}
 
-type UnknownObject = Record<string, unknown>;
-type TText = {
+export type UnknownObject = Record<string, unknown>;
+export type TText = {
   text: string;
 } & UnknownObject;
-type TDescendant = TElement | TText;
-type TElement = {
+export type TDescendant = TElement | TText;
+export type TElement = {
   children: TDescendant[];
   type: string;
 } & UnknownObject;
 
-type TNoteBody = TElement[];
+export type TNoteBody = TElement[];
 
 export interface INote {
   id: TDocumentId | undefined;
