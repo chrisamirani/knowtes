@@ -15,6 +15,7 @@ import {
   getNoteById,
   getRecentNotes,
   initNewNote,
+  searchNotes,
   updateNote,
 } from "../services/note";
 
@@ -69,5 +70,17 @@ export class NotesController extends Controller {
     @Query() id: TDocumentId
   ): Promise<INote | undefined> {
     return await getNoteById(req.email, id);
+  }
+
+  /**
+   * Perform a full text search on notes
+   */
+
+  @Get("search")
+  public async search(
+    @Request() req: IAuthenticatedRequest,
+    @Query() q: string
+  ): Promise<Omit<INote, "body">[] | undefined> {
+    return await searchNotes(q, req.team ?? "");
   }
 }

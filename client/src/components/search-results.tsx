@@ -7,48 +7,55 @@ import { INote } from '@/api-sdk';
 import { Loader2 } from 'lucide-react';
 
 import { toast } from '@/lib/ToastProvider';
+import { useDebounce } from '@/hooks/use-debounce';
 
 import { buttonVariants } from './plate-ui/button';
+import { DialogClose } from './plate-ui/dialog';
 
-export default function RecentNotes() {
+interface IProps {
+  query: string;
+}
+export default function SearchResults(props: IProps) {
   const [notes, setNotes] = useState<Omit<INote, 'body'>[]>([]);
   const [loading, setLoading] = useState(true);
+  const debouncedQuery = useDebounce(props.query, 1000);
   useEffect(() => {
-    const fetchRecentNotes = async () => {
+    const queryNotes = async () => {
       try {
-        const res = await API.NotesService.getRecent();
+        const res = await API.NotesService.search(debouncedQuery);
 
         setNotes(res);
       } catch (e: unknown) {
         console.log(e);
-        toast('Could not get recent notes', { type: 'warning' });
+        toast('Could not search notes', { type: 'warning' });
       }
       setLoading(false);
     };
 
-    fetchRecentNotes();
-  }, []);
+    queryNotes();
+  }, [debouncedQuery]);
 
   const NotesList = () => {
     if (notes.length === 0) {
       if (loading) {
         return <Loader2 className="size-6 animate-spin" />;
       }
-      return <p>No recent notes</p>;
+      return <p>No results</p>;
     }
     return notes.map((note, index) => (
-      <Link
-        key={index}
-        className={`${buttonVariants({ size: 'default', variant: 'outline' })} !block w-full overflow-hidden text-ellipsis text-left`}
-        href={`/dashboard?id=${note.id}`}
-      >
-        {note.title}
-      </Link>
+      <DialogClose key={index} asChild>
+        <Link
+          className={`${buttonVariants({ size: 'default', variant: 'outline' })} !block w-full overflow-hidden text-ellipsis text-left`}
+          href={`/dashboard?id=${note.id}`}
+        >
+          {note.title}
+        </Link>
+      </DialogClose>
     ));
   };
   return (
     <div>
-      <h4>Recent notes:</h4>
+      <h4>Your search results:</h4>
       <div className="flex max-h-56 scroll-m-0 flex-col items-center justify-center gap-2 overflow-y-scroll">
         <NotesList />
       </div>

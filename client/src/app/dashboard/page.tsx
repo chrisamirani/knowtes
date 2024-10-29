@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import API from '@/api';
 import { Value } from '@udecode/plate-common';
@@ -8,7 +9,11 @@ import { Value } from '@udecode/plate-common';
 import { toast } from '@/lib/ToastProvider';
 import { useDebounce } from '@/hooks/use-debounce';
 import FullPageLoader from '@/components/full-page-loader';
+import { Icons } from '@/components/icons';
 import PlateEditor from '@/components/plate-editor';
+import { buttonVariants } from '@/components/plate-ui/button';
+import { Separator } from '@/components/plate-ui/separator';
+import RecentNotes from '@/components/recent-notes';
 
 const initialTitle = 'Start with a title';
 
@@ -21,8 +26,9 @@ const emptyContent = [
 export default function Dashboard() {
   const [content, setContent] = useState<Value | never[] | undefined>();
   const [loading, setLoading] = useState(true);
-  const [noteId, setNoteId] = useState('');
+  const [noteId, setNoteId] = useState<string | undefined>(undefined);
   const [saving, setSaving] = useState(false);
+  const [randomNoteId, setRandomNoteId] = useState('');
   const params = useSearchParams();
 
   const debouncedContent = useDebounce(content, 5000);
@@ -47,7 +53,7 @@ export default function Dashboard() {
       return;
     }
     setSaving(true);
-    const id = noteId.length > 0 ? noteId : await initNote();
+    const id = noteId ? noteId : await initNote();
     const payload = {
       title,
       body,
@@ -88,6 +94,7 @@ export default function Dashboard() {
         setContent(undefined);
         // intentionally pause to trigger a render
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        setNoteId(undefined);
         setContent(emptyContent);
         return;
       }
@@ -109,19 +116,37 @@ export default function Dashboard() {
         });
       }
     };
-
+    setRandomNoteId(String(Math.random()).slice(2));
     init();
   }, [params]);
 
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <p className="text-sm text-slate-400">{saving ? 'Saving...' : 'Saved'}</p>
-      <div className="max-w-[1336px]">
+    <section className="container flex !h-full gap-6">
+      <div className="relative w-full max-w-[1336px]">
         {loading ? (
           <FullPageLoader />
         ) : (
           <PlateEditor content={content} onChange={setContent} />
         )}
+      </div>
+      <div className="relative m-2 max-h-full min-h-[500px] min-w-[300px] rounded-md bg-secondary p-3 shadow-md">
+        <p className="text-sm text-slate-900">
+          <strong>Status: </strong>
+          {saving ? 'Saving...' : 'Saved'}
+        </p>
+        <Separator className="my-3" />
+        <RecentNotes />
+        <Link
+          className={`${buttonVariants({
+            size: 'default',
+            variant: 'default',
+            isMenu: true,
+          })} absolute inset-x-0 bottom-0 box-border max-w-full`}
+          href={`/dashboard?note=${randomNoteId}`}
+        >
+          New note
+          <Icons.add className="ml-2 size-5" />
+        </Link>
       </div>
     </section>
   );

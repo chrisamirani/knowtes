@@ -1,6 +1,8 @@
 import { NoteDB } from "../db/note";
 import { UsersDB } from "../db/user";
 import { INote } from "../types";
+import { getTextEmbedding, saveEmbeddingOnNote } from "./embedding";
+import { notesSearchAgg } from "./aggregations";
 
 export const initNewNote = async (email: string, note: INote) => {
   try {
@@ -28,10 +30,12 @@ export const updateNote = async (email: string, newNote: INote) => {
     if (!user) {
       throw new Error("User does not exist");
     }
+
     const updatedNote = await NoteDB.updateOne(
       { _id: newNote.id, team: user.team },
       newNote
     );
+    saveEmbeddingOnNote(newNote);
 
     if (updatedNote.modifiedCount === 0) {
       throw new Error("Could find a match");
@@ -79,5 +83,19 @@ export const getNoteById = async (email: string, _id: string) => {
   } catch (e: unknown) {
     console.log(e);
     throw new Error("Could not get recent notes");
+  }
+};
+
+export const searchNotes = async (query: string, team: string) => {
+  try {
+    const queryVector = await getTextEmbedding(query);
+    const queryWords = query.split(" ");
+    const aggs = notesSearchAgg(queryVector, team, queryWords);
+    const notes = await NoteDB.aggregate(aggs);
+
+    return notes.map((note) => ({ id: note._id, title: note.title }));
+  } catch (e: unknown) {
+    console.log(e);
+    throw new Error("Could not get notes");
   }
 };

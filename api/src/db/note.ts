@@ -6,6 +6,8 @@ const noteSchema = new mongoose.Schema(
     team: { type: mongoose.Schema.ObjectId, rel: "Team", require: true },
     title: { type: String, default: "Enter title", require: true },
     body: { type: Array, default: [], require: true },
+    plainBody: { type: String, default: "", require: true },
+    embedding: { type: [Number], default: [] },
   },
   { timestamps: true }
 );

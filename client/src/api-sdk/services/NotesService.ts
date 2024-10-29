@@ -64,4 +64,21 @@ export class NotesService {
             },
         });
     }
+    /**
+     * Perform a full text search on notes
+     * @param q
+     * @returns Omit_INote_body_ Ok
+     * @throws ApiError
+     */
+    public static search(
+        q: string,
+    ): CancelablePromise<Array<Omit_INote_body_>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/notes/search',
+            query: {
+                'q': q,
+            },
+        });
+    }
 }
