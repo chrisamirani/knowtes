@@ -57,7 +57,8 @@ export const MediaToolbarButton = withRef<
   };
   return (
     <ToolbarButton ref={ref} {...props} {...rest}>
-      <Icons.image />
+      <Icons.image className="mr-2 size-5" />
+      Image
     </ToolbarButton>
   );
 });

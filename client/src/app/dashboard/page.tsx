@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import API from '@/api';
 import { Value } from '@udecode/plate-common';
@@ -9,9 +8,7 @@ import { Value } from '@udecode/plate-common';
 import { toast } from '@/lib/ToastProvider';
 import { useDebounce } from '@/hooks/use-debounce';
 import FullPageLoader from '@/components/full-page-loader';
-import { Icons } from '@/components/icons';
 import PlateEditor from '@/components/plate-editor';
-import { buttonVariants } from '@/components/plate-ui/button';
 import { Separator } from '@/components/plate-ui/separator';
 import RecentNotes from '@/components/recent-notes';
 
@@ -28,7 +25,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [noteId, setNoteId] = useState<string | undefined>(undefined);
   const [saving, setSaving] = useState(false);
-  const [randomNoteId, setRandomNoteId] = useState('');
   const params = useSearchParams();
 
   const debouncedContent = useDebounce(content, 5000);
@@ -116,7 +112,6 @@ export default function Dashboard() {
         });
       }
     };
-    setRandomNoteId(String(Math.random()).slice(2));
     init();
   }, [params]);
 
@@ -129,24 +124,13 @@ export default function Dashboard() {
           <PlateEditor content={content} onChange={setContent} />
         )}
       </div>
-      <div className="relative m-2 h-full min-h-[500px] max-h-[600px] min-w-[300px] rounded-md bg-secondary p-3 shadow-md">
+      <div className="relative m-2 h-full max-h-[600px] min-h-[500px] min-w-[300px] rounded-md bg-white p-3 pt-[5px] shadow-md">
         <p className="text-sm text-slate-900">
           <strong>Status: </strong>
           {saving ? 'Saving...' : 'Saved'}
         </p>
         <Separator className="my-3" />
         <RecentNotes />
-        <Link
-          className={`${buttonVariants({
-            size: 'default',
-            variant: 'default',
-            isMenu: true,
-          })} absolute inset-x-0 bottom-0 box-border max-w-full`}
-          href={`/dashboard?note=${randomNoteId}`}
-        >
-          New note
-          <Icons.add className="ml-2 size-5" />
-        </Link>
       </div>
     </section>
   );

@@ -39,7 +39,7 @@ export default function RecentNotes() {
     return notes.map((note, index) => (
       <Link
         key={index}
-        className={`${buttonVariants({ size: 'default', variant: 'outline' })} !block w-full overflow-hidden text-ellipsis text-left`}
+        className={`${buttonVariants({ size: 'default', variant: 'outline' })} !block h-[40px] w-full overflow-hidden text-ellipsis text-left`}
         href={`/dashboard?id=${note.id}`}
       >
         {note.title}

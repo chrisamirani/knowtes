@@ -15,7 +15,8 @@ export const IndentTodoToolbarButton = withRef<typeof ToolbarButton>(
 
     return (
       <ToolbarButton ref={ref} tooltip="Todo" {...props} {...rest}>
-        <Icons.todo />
+        <Icons.todo className="mr-2 size-5" />
+        Todo
       </ToolbarButton>
     );
   }

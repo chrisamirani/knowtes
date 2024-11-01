@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   BoldPlugin,
-  CodePlugin,
   ItalicPlugin,
   StrikethroughPlugin,
   UnderlinePlugin,
@@ -11,24 +10,16 @@ import {
   FontBackgroundColorPlugin,
   FontColorPlugin,
 } from '@udecode/plate-font/react';
-import { ListStyleType } from '@udecode/plate-indent-list';
-import { ImagePlugin } from '@udecode/plate-media/react';
 
 import { Icons, iconVariants } from '@/components/icons';
 import { AlignDropdownMenu } from '@/components/plate-ui/align-dropdown-menu';
 import { EmojiDropdownMenu } from '@/components/plate-ui/emoji-dropdown-menu';
-import { IndentListToolbarButton } from '@/components/plate-ui/indent-list-toolbar-button';
-import { IndentToolbarButton } from '@/components/plate-ui/indent-toolbar-button';
 import { LineHeightDropdownMenu } from '@/components/plate-ui/line-height-dropdown-menu';
 import { LinkToolbarButton } from '@/components/plate-ui/link-toolbar-button';
-import { MediaToolbarButton } from '@/components/plate-ui/media-toolbar-button';
 import { MoreDropdownMenu } from '@/components/plate-ui/more-dropdown-menu';
-import { OutdentToolbarButton } from '@/components/plate-ui/outdent-toolbar-button';
 import { TableDropdownMenu } from '@/components/plate-ui/table-dropdown-menu';
 
-import { AttachmentToolbarButton } from './attachment-toolbar-button';
 import { ColorDropdownMenu } from './color-dropdown-menu';
-import { IndentTodoToolbarButton } from './indent-todo-toolbar-button';
 import { InsertDropdownMenu } from './insert-dropdown-menu';
 import { MarkToolbarButton } from './mark-toolbar-button';
 import { ModeDropdownMenu } from './mode-dropdown-menu';
@@ -76,9 +67,6 @@ export function FixedToolbarButtons() {
               >
                 <Icons.strikethrough />
               </MarkToolbarButton>
-              <MarkToolbarButton nodeType={CodePlugin.key} tooltip="Code (⌘+E)">
-                <Icons.code />
-              </MarkToolbarButton>
             </ToolbarGroup>
 
             <ToolbarGroup>
@@ -100,20 +88,10 @@ export function FixedToolbarButtons() {
               <AlignDropdownMenu />
 
               <LineHeightDropdownMenu />
-
-              <IndentListToolbarButton nodeType={ListStyleType.Disc} />
-              <IndentListToolbarButton nodeType={ListStyleType.Decimal} />
-              <IndentTodoToolbarButton />
-
-              <OutdentToolbarButton />
-              <IndentToolbarButton />
             </ToolbarGroup>
 
             <ToolbarGroup>
               <LinkToolbarButton />
-
-              <MediaToolbarButton nodeType={ImagePlugin.key} />
-              <AttachmentToolbarButton />
 
               <TableDropdownMenu />
 

@@ -6,8 +6,6 @@ import {
   useIndentListToolbarButtonState,
 } from '@udecode/plate-indent-list/react';
 
-import { Icons } from '@/components/icons';
-
 import { ToolbarButton } from './toolbar';
 
 export const IndentListToolbarButton = withRef<
@@ -21,13 +19,12 @@ export const IndentListToolbarButton = withRef<
 
   return (
     <ToolbarButton
+      className="pl-0"
       ref={ref}
       tooltip={
         nodeType === ListStyleType.Disc ? 'Bulleted List' : 'Numbered List'
       }
       {...props}
-    >
-      {nodeType === ListStyleType.Disc ? <Icons.ul /> : <Icons.ol />}
-    </ToolbarButton>
+    ></ToolbarButton>
   );
 });

@@ -61,7 +61,8 @@ export const AttachmentToolbarButton = withRef<
   };
   return (
     <ToolbarButton ref={ref} {...props} {...rest}>
-      <Icons.upload />
+      <Icons.upload className="mr-2 size-5" />
+      Attachment
     </ToolbarButton>
   );
 });

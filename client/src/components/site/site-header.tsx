@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import { siteConfig } from '@/config/site';
 import { useKnowtesStore } from '@/lib/store';
@@ -8,13 +10,30 @@ import { MainNav } from '@/components/site/main-nav';
 
 import { Authentication } from '../auth';
 import CommandCenter from '../command-center';
+import { Icons } from '../icons';
+import { buttonVariants } from '../plate-ui/button';
 import { Settings } from '../settings';
 
 const UserHeader = () => {
+  const [randomNoteId, setRandomNoteId] = useState('');
+  const params = useSearchParams();
+  useEffect(() => {
+    setRandomNoteId(String(Math.random()).slice(2));
+  }, [params]);
   return (
     <div>
       <CommandCenter />
       <Settings />
+      <Link
+        className={`${buttonVariants({
+          size: 'sm',
+          variant: 'default',
+        })}`}
+        href={`/dashboard?note=${randomNoteId}`}
+      >
+        New
+        <Icons.add className="ml-2 size-5" />
+      </Link>
     </div>
   );
 };
