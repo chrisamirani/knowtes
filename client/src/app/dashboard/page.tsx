@@ -129,7 +129,7 @@ export default function Dashboard() {
           <PlateEditor content={content} onChange={setContent} />
         )}
       </div>
-      <div className="relative m-2 max-h-full min-h-[500px] min-w-[300px] rounded-md bg-secondary p-3 shadow-md">
+      <div className="relative m-2 h-full min-h-[500px] max-h-[600px] min-w-[300px] rounded-md bg-secondary p-3 shadow-md">
         <p className="text-sm text-slate-900">
           <strong>Status: </strong>
           {saving ? 'Saving...' : 'Saved'}

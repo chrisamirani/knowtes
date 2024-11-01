@@ -31,4 +31,5 @@ export type { UserToken } from './models/UserToken';
 export { ContactService } from './services/ContactService';
 export { NotesService } from './services/NotesService';
 export { TeamService } from './services/TeamService';
+export { UploadsService } from './services/UploadsService';
 export { UsersService } from './services/UsersService';

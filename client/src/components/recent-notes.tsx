@@ -49,7 +49,7 @@ export default function RecentNotes() {
   return (
     <div>
       <h4>Recent notes:</h4>
-      <div className="flex max-h-56 scroll-m-0 flex-col items-center justify-center gap-2 overflow-y-scroll">
+      <div className="flex max-h-full min-h-24 scroll-m-0 flex-col items-center justify-center gap-2 overflow-y-scroll">
         <NotesList />
       </div>
     </div>

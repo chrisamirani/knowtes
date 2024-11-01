@@ -26,6 +26,7 @@ import { MoreDropdownMenu } from '@/components/plate-ui/more-dropdown-menu';
 import { OutdentToolbarButton } from '@/components/plate-ui/outdent-toolbar-button';
 import { TableDropdownMenu } from '@/components/plate-ui/table-dropdown-menu';
 
+import { AttachmentToolbarButton } from './attachment-toolbar-button';
 import { ColorDropdownMenu } from './color-dropdown-menu';
 import { IndentTodoToolbarButton } from './indent-todo-toolbar-button';
 import { InsertDropdownMenu } from './insert-dropdown-menu';
@@ -112,6 +113,7 @@ export function FixedToolbarButtons() {
               <LinkToolbarButton />
 
               <MediaToolbarButton nodeType={ImagePlugin.key} />
+              <AttachmentToolbarButton />
 
               <TableDropdownMenu />
 

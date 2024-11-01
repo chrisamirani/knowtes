@@ -41,7 +41,8 @@ export default function PlateEditor(props: IProps) {
         </FixedToolbar>
 
         <Editor
-          className="px-[96px] py-16"
+          className="py-16"
+          style={{ overflow: 'auto', height: 'calc(100vh - 220px)' }}
           autoFocus
           focusRing={false}
           variant="ghost"

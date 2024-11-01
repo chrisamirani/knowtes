@@ -63,6 +63,7 @@ import {
   Twitter,
   Underline,
   Ungroup,
+  Upload,
   WrapText,
   X,
 } from 'lucide-react';
@@ -162,6 +163,7 @@ const borderTop = (props: LucideProps) => (
 );
 
 export const Icons = {
+  upload: Upload,
   add: Plus,
   todo: Square,
   chevronDown: ChevronDown,
